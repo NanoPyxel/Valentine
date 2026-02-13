@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background: #ffe6f0;
+    }
+    h1 {
+      color: #d6006e;
+    }
+    button {
+      font-size: 18px;
+      padding: 20px 30px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+    }
+    #yesBtn { background: #ff4d88; color: white; }
+    #noBtn  { background: #666; color: white;  }
+    
+     @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 0); }
+      50% { transform: translate(3px, 0); }
+      75% { transform: translate(-3px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .shaking {
+      animation: shake 0.2s infinite;
+    }
+
+  </style>
+</head>
+<body>
+
+  <img src="Hamster.jpg">
+  <h1>Will you be my valentine? ❤️</h1>
+
+  <button id="yesBtn">Yes</button>
+  <button id="noBtn">No</button>
+
+  
+ <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let yesScale = 1;
+    let noScale = 1;
+   let chaosStarted = false;
+  let clickCount = 0;
+
+     const messages = [
+    "Please?",
+    "Pretty please?",
+    "Are you really rejecting me!?",
+    "PRESSS YESSSSSS PLEASEEEE!",
+    "WHY ARE YOU NOT PRESSING YES!?",
+    "It doesn't have to be this way :(",
+    "AMI WHY ARE YOU DOINNNNNNNG THIS TO MEEEEEE!!!!",
+    "Ami...",
+    "WE HAVE BEEN TOGETHER FOR A LONG TIME NOW SURELY YOU WILL SAY YES!",
+    "8 Years woman, 8 YEARS!!! AND NOW YOU SAY NO?!",
+    "..................................................................",
+    "Okay then...",
+    "You know what...",
+    "I WILL JUST DO THIS INSTEAD THEN!"
+  ];
+
+    const yesMessages = [
+        "NOW YOU HAVE TO SAY YES!!!! :)"
+    ]
+
+    yesBtn.addEventListener("click", () => {
+      alert("Yay!!! ❤️");
+    });
+
+    noBtn.addEventListener("click", () => {
+          if (!chaosStarted) {
+      chaosStarted = true;
+      const rect = noBtn.getBoundingClientRect();
+      
+      noBtn.style.position = "absolute";
+      noBtn.style.left = rect.left + "px";
+      noBtn.style.top = rect.top + "px";
+    }
+      yesScale += 0.2;
+      yesBtn.style.transform = `scale(${yesScale})`;
+         
+    if (clickCount <  messages.length){
+        clickCount++;
+        noBtn.textContent = messages[clickCount % messages.length];
+    }
+
+      noScale -= 0.1;
+      if (noScale < 0.3) noScale = 0.3;
+      noBtn.style.transform = `scale(${noScale})`;
+      noBtn.classList.add("shaking");
+
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      if (clickCount <  messages.length){
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+      }else{
+        noBtn.style.left = 999999 + "px";
+        noBtn.style.top = 9999999 + "px";
+      }
+
+      if (clickCount == messages.length) {
+      yesScale += 7;
+      yesBtn.style.transform = `scale(${yesScale})`;
+      yesBtn.textContent = "NOW YOU HAVE TO SAY YES!!!! :)"
+      }
+
+            
+
+
+    });
+  </script>
+
+</body>
+</html>
